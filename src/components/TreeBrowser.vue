@@ -2,13 +2,13 @@
   <div id="app" @contextmenu="(e) => e.preventDefault()">
     <div class="container">
       <div
+        class="node"
+        :style="{'margin-left': depth * 20 + 'px'}"
         @contextmenu="handleContextMenu($event)"
         @click="nodeClicked"
-        :style="{'margin-left': depth * 20 + 'px'}"
-        class="node"
       >
-        <span v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
-        <span v-else class="type">&#9671;</span>
+        <span class="type" v-if="hasChildren">{{expanded ? '&#9660;' : '&#9658;'}}</span>
+        <span class="type" v-else>&#9671;</span>
         <span :style="getStyle(node)">{{node.name}}</span>
       </div>
 

@@ -1,9 +1,10 @@
 <template>
-  <div id="app">
-    <h1>Vue Tree Browser</h1>
+  <div id="app" @click="onClick">
+    <h1>Files Tree-View Component</h1>
     <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" @onRightClick="showContextMenu" />
     <FileContent :content="content" />
-    <ContextMenu :xPosition="xPosition" :yPosition="yPosition" :show="show"/>
+    <ContextMenu :xPosition="xPosition" :yPosition="yPosition" :show="showCM"/>
+    <ModalDialog />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import root from "./root.json";
 import TreeBrowser from "./components/TreeBrowser.vue";
 import FileContent from "./components/FileContent.vue";
 import ContextMenu from "./components/ContextMenu.vue";
+import ModalDialog from "./components/ModalDialog.vue";
 
 export default {
   name: "App",
@@ -22,7 +24,7 @@ export default {
     },
     xPosition: Number,
     yPosition: Number,
-    show: {
+    showCM: {
       type: Boolean,
       default: false
     }
@@ -37,20 +39,27 @@ export default {
       this.content = node.content;
     },
     showContextMenu(e) {
-      this.show = !this.show;
+      this.showCM = true;
       this.xPosition = e.x;
       this.yPosition = e.y;
+    },
+    onClick() {
+      this.showCM = false;
     }
   },
   components: {
     TreeBrowser,
     FileContent,
-    ContextMenu
+    ContextMenu,
+    ModalDialog
   }
 };
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
 
 body {
   background-color: #4b6584;

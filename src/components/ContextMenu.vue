@@ -1,13 +1,14 @@
 <template>
-    <div v-if="show" :style="{ 'top': yPosition + 'px', 'left': xPosition + 'px'}" class="custom-cm"
+    <div id="app" class="custom-cm"
+        v-if="show"
+        :style="{ 'top': yPosition + 'px', 'left': xPosition + 'px'}" 
         @contextmenu="(e) => e.preventDefault()"
     > 
-        <div class="custom-cm__item">Item #1</div>
-        <div class="custom-cm__item">Item #2</div>
-        <div class="custom-cm__item">Item #3</div>
-        <div class="custom-cm__divider"></div>
-        <div class="custom-cm__item">Item #4</div>
+        <div id="cn" class="custom-cm__item" @click="optionClicked($event)">Cambiar Nombre</div>
+        <div id="ac" class="custom-cm__item" @click="optionClicked($event)">Agregar Carpeta</div>
+        <div id="aa" class="custom-cm__item" @click="optionClicked($event)">Agregar Archivo</div>
     </div>
+    
 </template>
 
 <script>
@@ -26,12 +27,19 @@ export default {
             type: Boolean,
             default: false
         }
+    },
+    methods: {
+        optionClicked(event) {
+            alert(event.currentTarget.id);
+            this.show = false;
+
+            this.$emit("onClick", this.node);
+        }
     }
 }
 </script>
 
 <style scoped>
-
     .custom-cm {
         text-align: left;
         color: black;
@@ -51,10 +59,4 @@ export default {
     .custom-cm__item:hover {
         background-color: antiquewhite;
     }
-
-    .custom-cm__divider {
-        border-bottom: 1px solid #eeeeee;
-        margin: 10px 0px;
-    }
-
 </style>
