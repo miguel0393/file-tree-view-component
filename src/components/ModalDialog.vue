@@ -1,11 +1,12 @@
 <template>
     <div id="app">
         <transition name="fade" appear> 
-        <div class="modal" v-if="show">
+        <div class="modal" v-if="visible">
             <h1>MODAL DIALOG</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quos libero corrupti a porro pariatur unde, nesciunt, atque esse suscipit quas explicabo? Modi similique nobis obcaecati provident hic ut aut!</p>
             <input type="text">
             <button @click="buttonClicked">Ok</button>
+            <button @click="buttonClicked">Cancel</button>
         </div>
         </transition> 
     </div>
@@ -15,14 +16,15 @@
 export default {
     name: "ModalDialog",
     props: {
-        show: {
+        visible: {
             type: Boolean,
             default: false
         }
     },
     methods: {
         buttonClicked() {
-            this.show = false;
+            this.visible = false;
+             this.$emit("onClick");
         }
     }
 }
@@ -58,4 +60,16 @@ export default {
             font-weight: 400;
             margin-bottom: 15px;
     }
+
+    .modal input[type=text] {
+        width: 100%;
+        padding: .5rem;
+    }
+
+    .modal button {
+        width: 30%;
+        margin: 15px;
+        padding: .5rem;
+    }
+
 </style>

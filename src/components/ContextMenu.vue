@@ -1,12 +1,12 @@
 <template>
     <div id="app" class="custom-cm"
-        v-if="show"
+        v-if="visible"
         :style="{ 'top': yPosition + 'px', 'left': xPosition + 'px'}" 
         @contextmenu="(e) => e.preventDefault()"
     > 
-        <div id="cn" class="custom-cm__item" @click="optionClicked($event)">Cambiar Nombre</div>
-        <div id="ac" class="custom-cm__item" @click="optionClicked($event)">Agregar Carpeta</div>
-        <div id="aa" class="custom-cm__item" @click="optionClicked($event)">Agregar Archivo</div>
+        <div id="cn" class="custom-cm__item" @click="optionClicked">Cambiar Nombre</div>
+        <div id="ac" class="custom-cm__item" @click="optionClicked">Agregar Carpeta</div>
+        <div id="aa" class="custom-cm__item" @click="optionClicked">Agregar Archivo</div>
     </div>
     
 </template>
@@ -15,6 +15,10 @@
 export default {
     name: "ContextMenu",
     props: {
+        visible: {
+            type: Boolean,
+            default: false
+        },
         xPosition: {
             type: Number,
             default: 0
@@ -22,18 +26,12 @@ export default {
         yPosition: {
             type: Number,
             default: 0
-        },
-        show: {
-            type: Boolean,
-            default: false
-        }
+        }        
     },
     methods: {
-        optionClicked(event) {
-            alert(event.currentTarget.id);
-            this.show = false;
-
-            this.$emit("onClick", this.node);
+        optionClicked() {
+            this.visible = false;
+            this.$emit("onClick");
         }
     }
 }

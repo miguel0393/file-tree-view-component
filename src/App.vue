@@ -1,10 +1,15 @@
 <template>
   <div id="app" @click="onClick">
     <h1>Files Tree-View Component</h1>
+    
     <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" @onRightClick="showContextMenu" />
+
     <FileContent :content="content" />
-    <ContextMenu :xPosition="xPosition" :yPosition="yPosition" :show="showCM"/>
-    <ModalDialog />
+
+    <ContextMenu :xPosition="contextMenuXPosition" :yPosition="contextMenuYPosition" :visible="contextMenuIsVisible"
+      @onClick="showModalDialog"
+    />
+    <ModalDialog :visible="modalDialogIsVisible" @onClick="hideModalDialog"/>
   </div>
 </template>
 
@@ -22,11 +27,15 @@ export default {
       type: String,
       default: "CONTENIDO DEL ARCHIVO AQUÍ"
     },
-    xPosition: Number,
-    yPosition: Number,
-    showCM: {
+    contextMenuXPosition: Number,
+    contextMenuYPosition: Number,
+    contextMenuIsVisible: {
       type: Boolean,
       default: false
+    },
+    modalDialogIsVisible: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -39,12 +48,19 @@ export default {
       this.content = node.content;
     },
     showContextMenu(e) {
-      this.showCM = true;
-      this.xPosition = e.x;
-      this.yPosition = e.y;
+      this.contextMenuIsVisible = true;
+      this.contextMenuXPosition = e.x;
+      this.contextMenuYPosition = e.y;
+    },
+    showModalDialog() {
+      this.contextMenuIsVisible = false;
+      this.modalDialogIsVisible = true;
+    },
+    hideModalDialog() {
+      this.modalDialogIsVisible = false;
     },
     onClick() {
-      this.showCM = false;
+      this.contextMenuIsVisible = false;
     }
   },
   components: {
