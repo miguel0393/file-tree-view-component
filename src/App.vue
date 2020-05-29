@@ -1,22 +1,50 @@
 <template>
-  <div id="app">
-    <h1>Vue Tree Browser</h1>
-    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked"  @treeUpdated="treeWasUpdated" />
-    <!-- <FileContent :content="content" /> -->
+  
+  <div id="app" @click="onClick">
+    <h1>Files Tree-View Component</h1>
+    
+    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" @onRightClick="showContextMenu" @treeUpdated="treeWasUpdated" />
+
+    <FileContent :content="content" />
+
+    <ContextMenu :xPosition="contextMenuXPosition" :yPosition="contextMenuYPosition" :visible="contextMenuIsVisible"
+      @onClick="showModalDialog"
+    />
+    <ModalDialog :visible="modalDialogIsVisible" :title="modalTitle" :description="modalDescription" @onClick="hideModalDialog"/>
   </div>
 </template>
 
 <script>
 import TreeBrowser from "./components/TreeBrowser.vue";
-// import FileContent from "./components/FileContent.vue";
+import FileContent from "./components/FileContent.vue";
+import ContextMenu from "./components/ContextMenu.vue";
+import ModalDialog from "./components/ModalDialog.vue";
 
 export default {
   name: "App",
   props: {
     content: {
       type: String,
-      default: "CONTENIDO DEL ARCHIVO AQUÍ",
+      default: "CONTENIDO DEL ARCHIVO AQUÍ"
     },
+    contextMenuXPosition: Number,
+    contextMenuYPosition: Number,
+    contextMenuIsVisible: {
+      type: Boolean,
+      default: false
+    },
+    modalDialogIsVisible: {
+      type: Boolean,
+      default: true
+    },
+    modalTitle: {
+      type: String,
+      default: "Cambiar Nombre"
+    },
+    modalDescription: {
+      type: String,
+      default: "Ingrese el nombre del nodo raíz"
+    }
   },
   data() {
     return {
@@ -47,16 +75,39 @@ export default {
     },
     treeWasUpdated(){
       localStorage.treeStructure = JSON.stringify(this.root);
+    },
+    showContextMenu(e) {
+      this.contextMenuIsVisible = true;
+      this.contextMenuXPosition = e.x;
+      this.contextMenuYPosition = e.y;
+    },
+    showModalDialog(tilte, description) {
+      this.contextMenuIsVisible = false;
+      this.modalDialogIsVisible = true;
+      this.modalTitle = tilte;
+      this.modalDescription = description;
+    },
+    hideModalDialog() {
+      this.modalDialogIsVisible = false;
+    },
+    onClick() {
+      this.contextMenuIsVisible = false;
     }
   },
   components: {
     TreeBrowser,
-    // FileContent
-  },
+    FileContent,
+    ContextMenu,
+    ModalDialog
+  }
 };
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #4b6584;
   color: aliceblue;

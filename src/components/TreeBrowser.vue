@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @contextmenu="(e) => e.preventDefault()">
     <div class="container" v-if="!treeIsEmpty">
       <div @click="nodeClicked" :style="{ 'margin-left': depth * 20 + 'px' }" class="node">
         <span v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
@@ -15,6 +15,7 @@
           :depth="depth + 1"
           @onClick="(node) => $emit('onClick', node)"
           @treeUpdated="() => $emit('treeUpdated', '')"
+          @onRightClick="(e) => $emit('onRightClick', e)"
         />
       </div>
     </div>
@@ -53,6 +54,7 @@ export default {
             content: "New Added Children"
           }
         ]);
+        this.$emit("onClick", this.node);
       }
       this.$emit("treeUpdated", "");
     },
@@ -62,7 +64,6 @@ export default {
         // color = colorHash.hex(node.name.split(".")[1]);
         color = "#ecf0f1";
       }
-
       return {
         color
       };
@@ -72,6 +73,11 @@ export default {
         this.$set(this.node, 'name', this.rootName);
         this.$emit("treeUpdated", "");
       }
+    },
+    handleContextMenu(e) {
+      e.preventDefault();
+
+      this.$emit("onRightClick", e);
     }
   },
   computed: {
@@ -96,16 +102,16 @@ export default {
   background-color: #2c3e50;
 }
 
-.container {
-  margin: 5px;
-  width: 100%;
-}
-
 .node {
   text-align: left;
   font-size: 16px;
   width: 100%;
   cursor: pointer;
+}
+
+.container {
+  margin: 5px;
+  width: 100%;
 }
 
 .type {
