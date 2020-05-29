@@ -1,38 +1,58 @@
 <template>
   <div id="app">
     <h1>Vue Tree Browser</h1>
-    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" />
-    <FileContent :content="content" />
+    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked"  @treeUpdated="treeWasUpdated" />
+    <!-- <FileContent :content="content" /> -->
   </div>
 </template>
 
 <script>
-import root from "./root.json";
 import TreeBrowser from "./components/TreeBrowser.vue";
-import FileContent from "./components/FileContent.vue";
+// import FileContent from "./components/FileContent.vue";
 
 export default {
   name: "App",
-  props:{
+  props: {
     content: {
       type: String,
-      default: "CONTENIDO DEL ARCHIVO AQUÍ"
-    }
+      default: "CONTENIDO DEL ARCHIVO AQUÍ",
+    },
   },
   data() {
     return {
-      root
+      // root: {
+      //   name: "/",
+      //   children: [
+      //     {
+      //       name: "createTreeData1.js",
+      //       content: "Contenido de prueba 1",
+      //     },
+      //     {
+      //       name: "createTreeData2.js",
+      //       content: "Contenido de prueba 2",
+      //     },
+      //   ],
+      // },
+      root: {},
     };
+  },
+  created(){
+     if (localStorage.treeStructure) {
+      this.root = JSON.parse(localStorage.treeStructure);
+    }
   },
   methods: {
     nodeWasClicked(node) {
       this.content = node.content;
+    },
+    treeWasUpdated(){
+      localStorage.treeStructure = JSON.stringify(this.root);
     }
   },
   components: {
     TreeBrowser,
-    FileContent
-  }
+    // FileContent
+  },
 };
 </script>
 

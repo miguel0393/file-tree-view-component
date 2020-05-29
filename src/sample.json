@@ -1,0 +1,13 @@
+{
+  "name": "/",
+  "children": [
+    {
+      "name": "createTreeData1.js",
+      "content": "Contenido de prueba 1"
+    },
+    {
+      "name": "createTreeData2.js",
+      "content": "Contenido de prueba 2"
+    }
+  ]
+}
