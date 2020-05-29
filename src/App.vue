@@ -1,8 +1,9 @@
 <template>
+  
   <div id="app" @click="onClick">
     <h1>Files Tree-View Component</h1>
     
-    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" @onRightClick="showContextMenu" />
+    <TreeBrowser class="tree" :node="root" @onClick="nodeWasClicked" @onRightClick="showContextMenu" @treeUpdated="treeWasUpdated" />
 
     <FileContent :content="content" />
 
@@ -14,7 +15,6 @@
 </template>
 
 <script>
-import root from "./root.json";
 import TreeBrowser from "./components/TreeBrowser.vue";
 import FileContent from "./components/FileContent.vue";
 import ContextMenu from "./components/ContextMenu.vue";
@@ -22,7 +22,7 @@ import ModalDialog from "./components/ModalDialog.vue";
 
 export default {
   name: "App",
-  props:{
+  props: {
     content: {
       type: String,
       default: "CONTENIDO DEL ARCHIVO AQUÍ"
@@ -48,12 +48,33 @@ export default {
   },
   data() {
     return {
-      root
+      // root: {
+      //   name: "/",
+      //   children: [
+      //     {
+      //       name: "createTreeData1.js",
+      //       content: "Contenido de prueba 1",
+      //     },
+      //     {
+      //       name: "createTreeData2.js",
+      //       content: "Contenido de prueba 2",
+      //     },
+      //   ],
+      // },
+      root: {},
     };
+  },
+  created(){
+     if (localStorage.treeStructure) {
+      this.root = JSON.parse(localStorage.treeStructure);
+    }
   },
   methods: {
     nodeWasClicked(node) {
       this.content = node.content;
+    },
+    treeWasUpdated(){
+      localStorage.treeStructure = JSON.stringify(this.root);
     },
     showContextMenu(e) {
       this.contextMenuIsVisible = true;

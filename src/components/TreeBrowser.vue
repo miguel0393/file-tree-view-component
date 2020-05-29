@@ -1,15 +1,10 @@
 <template>
   <div id="app" @contextmenu="(e) => e.preventDefault()">
-    <div class="container">
-      <div
-        class="node"
-        :style="{'margin-left': depth * 20 + 'px'}"
-        @contextmenu="handleContextMenu($event)"
-        @click="nodeClicked"
-      >
-        <span class="type" v-if="hasChildren">{{expanded ? '&#9660;' : '&#9658;'}}</span>
-        <span class="type" v-else>&#9671;</span>
-        <span :style="getStyle(node)">{{node.name}}</span>
+    <div class="container" v-if="!treeIsEmpty">
+      <div @click="nodeClicked" :style="{ 'margin-left': depth * 20 + 'px' }" class="node">
+        <span v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
+        <span v-else class="type">&#9671;</span>
+        <span :style="getStyle(node)">{{ node.name }}</span>
       </div>
 
       <div v-if="expanded">
@@ -19,16 +14,20 @@
           :node="child"
           :depth="depth + 1"
           @onClick="(node) => $emit('onClick', node)"
+          @treeUpdated="() => $emit('treeUpdated', '')"
           @onRightClick="(e) => $emit('onRightClick', e)"
         />
       </div>
+    </div>
+    <div v-else>
+      <p>Empty tree</p>
+      <input v-model="rootName">
+      <button v-on:click="addRootName">Add Element</button>
     </div>
   </div>
 </template>
 
 <script>
-// import * as ColorHash from "color-hash";
-// const colorHash = new ColorHash();
 
 export default {
   name: "TreeBrowser",
@@ -41,15 +40,23 @@ export default {
   },
   data() {
     return {
-      expanded: false
+      expanded: false,
+      rootName: '',
     };
   },
   methods: {
     nodeClicked() {
       this.expanded = !this.expanded;
       if (!this.hasChildren) {
+        this.$set(this.node, "children", [
+          {
+            name: "newchildren.js",
+            content: "New Added Children"
+          }
+        ]);
         this.$emit("onClick", this.node);
       }
+      this.$emit("treeUpdated", "");
     },
     getStyle(node) {
       let color = "#e74c3c";
@@ -61,6 +68,12 @@ export default {
         color
       };
     },
+    addRootName() {
+      if (this.rootName !== '') {
+        this.$set(this.node, 'name', this.rootName);
+        this.$emit("treeUpdated", "");
+      }
+    },
     handleContextMenu(e) {
       e.preventDefault();
 
@@ -69,7 +82,14 @@ export default {
   },
   computed: {
     hasChildren() {
-      return this.node.children;
+      if (this.node) {
+        return this.node.children;
+      } else {
+        return false;
+      }
+    },
+    treeIsEmpty(){
+        return Object.keys(this.node).length === 0
     }
   }
 };
