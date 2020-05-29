@@ -4,9 +4,9 @@
         :style="{ 'top': yPosition + 'px', 'left': xPosition + 'px'}" 
         @contextmenu="(e) => e.preventDefault()"
     > 
-        <div id="cn" class="custom-cm__item" @click="optionClicked">Cambiar Nombre</div>
-        <div id="ac" class="custom-cm__item" @click="optionClicked">Agregar Carpeta</div>
-        <div id="aa" class="custom-cm__item" @click="optionClicked">Agregar Archivo</div>
+        <div class="custom-cm__item" @click="changeName">Cambiar Nombre</div>
+        <div class="custom-cm__item" @click="addFolder">Agregar Carpeta</div>
+        <div class="custom-cm__item" @click="addFile">Agregar Archivo</div>
     </div>
     
 </template>
@@ -29,9 +29,17 @@ export default {
         }        
     },
     methods: {
-        optionClicked() {
+        changeName() {
             this.visible = false;
-            this.$emit("onClick");
+            this.$emit("onClick", "Cambiar Nombre", "Ingrese el nombre del elemento");
+        },
+        addFolder() {
+            this.visible = false;
+            this.$emit("onClick", "Agregar Carpeta", "Ingrese el nombre del elemento");
+        },
+        addFile() {
+            this.visible = false;
+            this.$emit("onClick", "Agregar Archivo", "Ingrese el nombre del elemento");
         }
     }
 }

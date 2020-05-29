@@ -2,8 +2,8 @@
     <div id="app">
         <transition name="fade" appear> 
         <div class="modal" v-if="visible">
-            <h1>MODAL DIALOG</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident quos libero corrupti a porro pariatur unde, nesciunt, atque esse suscipit quas explicabo? Modi similique nobis obcaecati provident hic ut aut!</p>
+            <h1>{{title}}</h1>
+            <p>{{description}}</p>
             <input type="text">
             <button @click="buttonClicked">Ok</button>
             <button @click="buttonClicked">Cancel</button>
@@ -16,6 +16,8 @@
 export default {
     name: "ModalDialog",
     props: {
+        title: String,
+        description: String,
         visible: {
             type: Boolean,
             default: false

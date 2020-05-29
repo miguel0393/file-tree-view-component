@@ -9,7 +9,7 @@
     <ContextMenu :xPosition="contextMenuXPosition" :yPosition="contextMenuYPosition" :visible="contextMenuIsVisible"
       @onClick="showModalDialog"
     />
-    <ModalDialog :visible="modalDialogIsVisible" @onClick="hideModalDialog"/>
+    <ModalDialog :visible="modalDialogIsVisible" :title="modalTitle" :description="modalDescription" @onClick="hideModalDialog"/>
   </div>
 </template>
 
@@ -36,6 +36,14 @@ export default {
     modalDialogIsVisible: {
       type: Boolean,
       default: true
+    },
+    modalTitle: {
+      type: String,
+      default: "Cambiar Nombre"
+    },
+    modalDescription: {
+      type: String,
+      default: "Ingrese el nombre del nodo raíz"
     }
   },
   data() {
@@ -52,9 +60,11 @@ export default {
       this.contextMenuXPosition = e.x;
       this.contextMenuYPosition = e.y;
     },
-    showModalDialog() {
+    showModalDialog(tilte, description) {
       this.contextMenuIsVisible = false;
       this.modalDialogIsVisible = true;
+      this.modalTitle = tilte;
+      this.modalDescription = description;
     },
     hideModalDialog() {
       this.modalDialogIsVisible = false;
