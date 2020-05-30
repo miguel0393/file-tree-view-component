@@ -1,7 +1,7 @@
 <template>
   <div id="app" @contextmenu="(e) => e.preventDefault()">
     <div class="container" v-if="!treeIsEmpty">
-      <div @click="nodeClicked" :style="{ 'margin-left': depth * 20 + 'px' }" class="node">
+      <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @click="nodeClicked" >
         <span v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
         <span v-else class="type">&#9671;</span>
         <span :style="getStyle(node)">{{ node.name }}</span>
@@ -15,7 +15,7 @@
           :depth="depth + 1"
           @onClick="(node) => $emit('onClick', node)"
           @treeUpdated="() => $emit('treeUpdated', '')"
-          @onRightClick="(e) => $emit('onRightClick', e)"
+          @onRightClick="(e, target, type) => $emit('onRightClick',e, target, type)"
         />
       </div>
     </div>
@@ -48,12 +48,12 @@ export default {
     nodeClicked() {
       this.expanded = !this.expanded;
       if (!this.hasChildren) {
-        this.$set(this.node, "children", [
-          {
-            name: "newchildren.js",
-            content: "New Added Children"
-          }
-        ]);
+        // this.$set(this.node, "children", [
+        //   {
+        //     name: "newchildren.js",
+        //     content: "New Added Children"
+        //   }
+        // ]);
         this.$emit("onClick", this.node);
       }
       this.$emit("treeUpdated", "");
@@ -76,8 +76,18 @@ export default {
     },
     handleContextMenu(e) {
       e.preventDefault();
-
-      this.$emit("onRightClick", e);
+      //Root Node
+      if (this.depth === 0) {
+        this.$emit("onRightClick",e, this.node, 'root');
+      }
+      //Folder
+      if (this.depth > 0 && this.node.children) {
+        this.$emit("onRightClick",e, this.node, 'folder');
+      }
+      //File
+      if (this.depth > 0 && !this.node.children) {
+        this.$emit("onRightClick",e, this.node, 'file');
+      }
     }
   },
   computed: {
