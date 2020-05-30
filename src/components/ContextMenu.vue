@@ -42,18 +42,15 @@ export default {
       menuOptions: {
         root: [
           { name: "Delete tree", function: "delete-tree" },
-          { name: "Add Subfolder", function: "add-subfolder" },
-          { name: "Expand/Collapse", function: "toggle-expand-tree" }
+          { name: "Add Subfolder", function: "add-subfolder" }
         ],
         folder: [
           { name: "Delete subfolder", function: "delete-subfolder" },
-          { name: "Add file", function: "add-file" },
-          { name: "Expand/collapse", function: "toggle-expand-node" }
+          { name: "Add file", function: "add-file" }
         ],
         file: [
           { name: "Delete file", function: "delete-file" },
-          { name: "Modify file", function: "modify-file" },
-          { name: "Show file", function: "show-file" }
+          { name: "Modify file", function: "modify-file" }
         ]
       },
       currentOptions: [],

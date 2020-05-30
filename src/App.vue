@@ -121,27 +121,20 @@ export default {
           break;
         case 'add-subfolder':
           break;
-        case 'toggle-expand-tree':
-          
-          break;
         case 'delete-subfolder':
           
           break;
         case 'add-file':
           
           break;
-        case 'toggle-expand-node':
-          
-          break;
+       
         case 'delete-file':
              
           break;
         case 'modify-file':
           
           break;
-        case 'show-file':
-          
-          break;
+       
       
         default:
 
