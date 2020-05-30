@@ -13,6 +13,7 @@
           :key="child.name"
           :node="child"
           :depth="depth + 1"
+          :treeIsEmpty="treeIsEmpty"
           @onClick="(node) => $emit('onClick', node)"
           @treeUpdated="() => $emit('treeUpdated', '')"
           @onRightClick="(e, target, type) => $emit('onRightClick',e, target, type)"
@@ -22,7 +23,7 @@
     <div v-else>
       <p>Empty tree</p>
       <input v-model="rootName">
-      <button v-on:click="addRootName">Add Element</button>
+      <button v-on:click="addRootName">Element</button>
     </div>
   </div>
 </template>
@@ -36,16 +37,18 @@ export default {
     depth: {
       type: Number,
       default: 0
-    }
+    },
+    treeIsEmpty: Boolean
   },
   data() {
     return {
       expanded: false,
-      rootName: '',
+      rootName:'',
     };
   },
   methods: {
     nodeClicked() {
+      console.log(this.node);
       this.expanded = !this.expanded;
       if (!this.hasChildren) {
         // this.$set(this.node, "children", [
@@ -70,8 +73,12 @@ export default {
     },
     addRootName() {
       if (this.rootName !== '') {
+        console.log(this.node);
         this.$set(this.node, 'name', this.rootName);
+        this.$set(this.node, 'children', []);
+        console.log(this.node);
         this.$emit("treeUpdated", "");
+        this.treeIsEmpty = false;
       }
     },
     handleContextMenu(e) {
@@ -98,9 +105,6 @@ export default {
         return false;
       }
     },
-    treeIsEmpty(){
-        return Object.keys(this.node).length === 0
-    }
   }
 };
 </script>

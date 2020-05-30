@@ -5,6 +5,7 @@
     <TreeBrowser
       class="tree"
       :node="root"
+      :treeIsEmpty="Object.keys(this.root).length === 0"
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
@@ -22,7 +23,7 @@
     <ModalDialog
       :visible="modalDialogIsVisible"
       :title="modalTitle"
-      :description="modalDescription"
+      :showTextArea="modalShowTextArea"
       @onClick="hideModalDialog"
     />
   </div>
@@ -49,9 +50,9 @@ export default {
       type: String,
       default: "Cambiar Nombre"
     },
-    modalDescription: {
-      type: String,
-      default: "Ingrese el nombre del nodo raíz"
+    modalShowTextArea: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -97,47 +98,70 @@ export default {
       this.contextMenuXPosition = e.x;
       this.contextMenuYPosition = e.y;
     },
-    showModalDialog(title, description) {
+    showModalDialog(title, showTextArea) {
       this.modalDialogIsVisible = true;
       this.modalTitle = title;
-      this.modalDescription = description;
+      this.modalShowTextArea = showTextArea;
     },
-    hideModalDialog() {
+    hideModalDialog(newName) {
       this.modalDialogIsVisible = false;
+      console.log(this.currentNode.children);
+
+      switch (this.currentOperation) {
+        case "add-subfolder":
+            this.currentNode.children.push({
+              name: newName,
+              children: []
+            });
+          break;
+
+          case "add-file":
+            this.currentNode.children.push({
+              name: newName,
+              children: [],
+              content: ""
+            });
+          // }
+          break;
+      }
+
+      this.treeWasUpdated();
     },
     onClick() {
       this.contextMenuIsVisible = false;
     },
-    deleteTree(){
+    deleteTree() {
       localStorage.treeStructure = JSON.stringify({});
       this.root = JSON.parse(localStorage.treeStructure);
     },
-    handleMenuOperation(operation){
+    handleMenuOperation(operation) {
       this.contextMenuIsVisible = false;
       this.currentOperation = operation;
-      switch (operation) {
-        case 'delete-tree':
-          this.deleteTree()
-          break;
-        case 'add-subfolder':
-          break;
-        case 'delete-subfolder':
-          
-          break;
-        case 'add-file':
-          
-          break;
-       
-        case 'delete-file':
-             
-          break;
-        case 'modify-file':
-          
-          break;
-       
-      
-        default:
 
+      switch (operation) {
+        case "delete-tree":
+          this.deleteTree();
+          break;
+
+        case "add-subfolder":
+          this.showModalDialog("Add Subfolder", false);
+          break;
+
+        case "delete-subfolder":
+          break;
+
+        case "add-file":
+          this.showModalDialog("Add File", true);
+          break;
+
+        case "delete-file":
+          break;
+
+        case "modify-file":
+          this.showModalDialog("Add Subfolder", true);
+          break;
+
+        default:
           break;
       }
     }
