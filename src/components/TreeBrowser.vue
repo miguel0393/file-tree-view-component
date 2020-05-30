@@ -1,10 +1,10 @@
 <template>
   <div id="app" @contextmenu="(e) => e.preventDefault()">
     <div class="container" v-if="!treeIsEmpty">
-      <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @click="nodeClicked" >
-        <span v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
-        <span v-else class="type">&#9671;</span>
-        <span :style="getStyle(node)">{{ node.name }}</span>
+      <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @dblclick="nodeClicked" >
+        <span unselectable="on" v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
+        <span unselectable="on" v-else class="type">&#9671;</span>
+        <span unselectable="on" :style="getStyle(node)">{{ node.name }}</span>
       </div>
 
       <div v-if="expanded">
@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     nodeClicked() {
-      console.log(this.node);
       this.expanded = !this.expanded;
       if (!this.hasChildren) {
         // this.$set(this.node, "children", [
@@ -73,10 +72,8 @@ export default {
     },
     addRootName() {
       if (this.rootName !== '') {
-        console.log(this.node);
         this.$set(this.node, 'name', this.rootName);
         this.$set(this.node, 'children', []);
-        console.log(this.node);
         this.$emit("treeUpdated", "");
         this.treeIsEmpty = false;
       }
@@ -120,7 +117,14 @@ export default {
   text-align: left;
   font-size: 16px;
   width: 100%;
-  cursor: pointer;
+
+  overflow-x: visible;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  
 }
 
 .container {
