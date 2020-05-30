@@ -6,6 +6,7 @@
       class="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
+      :expanded="expandedTree"
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
@@ -82,7 +83,8 @@ export default {
       currentOperation: null,
       currentNode: null,
       modalCurrentName: null,
-      modalCurrentContent: null
+      modalCurrentContent: null,
+      expandedTree: false
     };
   },
   created() {
@@ -98,6 +100,7 @@ export default {
       localStorage.treeStructure = JSON.stringify(this.root);
     },
     showContextMenu(e, target, type) {
+      this.expandedTree = true;
       this.currentNode = target;
       this.contextMenuType = type;
       this.contextMenuIsVisible = true;
