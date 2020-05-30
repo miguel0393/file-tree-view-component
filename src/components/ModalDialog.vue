@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <transition name="fade" appear>
-      <div class="modal" v-if="visible">
+      <div class="modal">
         <h1>{{title}}</h1>
         <!-- <p>{{description}}</p> -->
 
-        <input type="text" autofocus placeholder="Name..." v-model="elementName" />
+        <input type="text" autofocus placeholder="Name..." v-model="inputName" />
         <textarea
           placeholder="File content..."
           resize="false"
@@ -35,15 +35,16 @@ export default {
     elementContent: {
       type: String,
       default: ""
-    },
-    visible: {
-      type: Boolean,
-      default: false
+    }
+  },
+  data(){
+    return{
+      inputName: this.elementName
     }
   },
   methods: {
     okButtonClicked() {
-      this.$emit("onOkClick", this.elementName, this.elementContent);
+      this.$emit("onOkClick", this.inputName, this.elementContent);
     },
     cancelButtonClicked() {
       this.$emit("onCancelClick", this.newName);

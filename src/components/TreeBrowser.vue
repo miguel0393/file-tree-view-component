@@ -82,15 +82,15 @@ export default {
       e.preventDefault();
       //Root Node
       if (this.depth === 0) {
-        this.$emit("onRightClick",e, this.node, 'root');
+        this.$emit("onRightClick",e, this, 'root');
       }
       //Folder
       if (this.depth > 0 && this.node.children) {
-        this.$emit("onRightClick",e, this.node, 'folder');
+        this.$emit("onRightClick",e, this, 'folder');
       }
       //File
       if (this.depth > 0 && !this.node.children) {
-        this.$emit("onRightClick",e, this.node, 'file');
+        this.$emit("onRightClick",e, this, 'file');
       }
     }
   },

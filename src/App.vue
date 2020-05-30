@@ -21,7 +21,7 @@
       :menuType="contextMenuType"
     />
 
-    <ModalDialog
+    <ModalDialog v-if="modalDialogIsVisible"
       :visible="modalDialogIsVisible"
       :title="modalTitle"
       :showTextArea="modalShowTextArea"
@@ -41,24 +41,7 @@ import ModalDialog from "./components/ModalDialog.vue";
 
 export default {
   name: "App",
-  props: {
-    content: {
-      type: String,
-      default: "Empty file..."
-    },
-    modalDialogIsVisible: {
-      type: Boolean,
-      default: false
-    },
-    modalTitle: {
-      type: String,
-      default: "Cambiar Nombre"
-    },
-    modalShowTextArea: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: { },
   data() {
     return {
       // root: {
@@ -75,12 +58,16 @@ export default {
       //   ],
       // },
       root: {},
+      content: 'Empty file...',
       contextMenuType: "",
       contextMenuXPosition: 0,
       contextMenuYPosition: 0,
       contextMenuIsVisible: false,
       currentOperation: null,
       currentNode: null,
+      modalDialogIsVisible: false,
+      modalTitle: "Cambiar Nombre",
+      modalShowTextArea: false,
       modalCurrentName: null,
       modalCurrentContent: null
     };
@@ -100,15 +87,15 @@ export default {
     showContextMenu(e, target, type) {
       this.currentNode = target;
       this.contextMenuType = type;
-      this.contextMenuIsVisible = true;
       this.contextMenuXPosition = e.x;
       this.contextMenuYPosition = e.y;
+      this.contextMenuIsVisible = true;
     },
     showModalDialog(title, showTextArea, currentName, currentContent) {
       this.modalDialogIsVisible = true;
-
       this.modalTitle = title;
       this.modalShowTextArea = showTextArea;
+      
       this.modalCurrentName = currentName;
       this.modalCurrentContent = currentContent;
     },
@@ -117,23 +104,23 @@ export default {
 
       switch (this.currentOperation) {
         case "add-subfolder":
-            this.currentNode.children.push({
+            this.currentNode.node.children.push({
               name: newName,
               children: []
             });
           break;
 
           case "add-file":
-            this.currentNode.children.push({
+            this.currentNode.node.children.push({
               name: newName,
               content: ""
             });
           break;
 
           case "modify-file":
-            this.$set(this.currentNode, "name", newName);
-            this.$set(this.currentNode, "content", newContent);
-            this.content = this.currentNode.content;
+            this.$set(this.currentNode.node, "name", newName);
+            this.$set(this.currentNode.node, "content", newContent);
+            this.content = this.currentNode.node.content;
           break;
       }
 
@@ -145,6 +132,19 @@ export default {
     deleteTree() {
       localStorage.treeStructure = JSON.stringify({});
       this.root = JSON.parse(localStorage.treeStructure);
+    },
+    deleteNode(parent, child) {
+      //Find index for child we want to delete
+      var index;
+      for (let i = 0, len = parent.$children.length; i < len; i++) {
+        if (parent.$children[i]._uid === child._uid) {
+          index = i;
+          break;
+        }
+      }
+      parent.$children.splice(index,1);
+      this.$set(parent.node, 'children', parent.$children.map(child => child.node));
+      this.treeWasUpdated();
     },
     handleMenuOperation(operation) {
       this.contextMenuIsVisible = false;
@@ -162,6 +162,7 @@ export default {
           break;
 
         case "delete-subfolder":
+          this.deleteNode(this.currentNode.$parent, this.currentNode);
           break;
 
         case "add-file":
@@ -169,11 +170,11 @@ export default {
           break;
 
         case "delete-file":
-          
+          this.deleteNode(this.currentNode.$parent, this.currentNode);
           break;
 
         case "modify-file":
-           this.showModalDialog("Modify File", true, this.currentNode.name, this.currentNode.content);
+           this.showModalDialog("Modify File", true, this.currentNode.node.name, this.currentNode.node.content);
           break;
 
         default:
