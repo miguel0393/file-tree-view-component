@@ -5,12 +5,12 @@
         <h1>{{title}}</h1>
         <!-- <p>{{description}}</p> -->
 
-        <input type="text" autofocus placeholder="Name..." v-model="newName" />
+        <input type="text" autofocus placeholder="Name..." v-model="elementName" />
         <textarea
           placeholder="File content..."
           resize="false"
           v-if="showTextArea"
-          v-model="content"
+          v-model="elementContent"
         />
         <button @click="okButtonClicked">Ok</button>
         <button @click="cancelButtonClicked">Cancel</button>
@@ -28,8 +28,14 @@ export default {
       type: Boolean,
       default: false
     },
-    newName: String,
-    content: String,
+    elementName: {
+      type: String,
+      default: ""
+    },
+    elementContent: {
+      type: String,
+      default: ""
+    },
     visible: {
       type: Boolean,
       default: false
@@ -37,10 +43,10 @@ export default {
   },
   methods: {
     okButtonClicked() {
-      this.$emit("onClick", this.newName);
+      this.$emit("onOkClick", this.elementName, this.elementContent);
     },
     cancelButtonClicked() {
-      this.visible = false;
+      this.$emit("onCancelClick", this.newName);
     }
   }
 };
