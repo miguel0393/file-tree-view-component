@@ -9,6 +9,7 @@
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
+      @setRootName="setRootName"
     />
 
     <FileContent :content="content" />
@@ -84,6 +85,10 @@ export default {
     treeWasUpdated() {
       localStorage.treeStructure = JSON.stringify(this.root);
     },
+    setRootName(){
+      this.currentOperation = 'set-root-name';
+      this.showModalDialog('Set tree name', false)
+    },
     showContextMenu(e, target, type) {
       this.currentNode = target;
       this.contextMenuType = type;
@@ -121,6 +126,11 @@ export default {
             this.$set(this.currentNode.node, "name", newName);
             this.$set(this.currentNode.node, "content", newContent);
             this.content = this.currentNode.node.content;
+          break;
+
+          case "set-root-name":
+            this.$set(this.root, 'name', newName)
+            this.$set(this.root, 'children', [])
           break;
       }
 
@@ -180,6 +190,11 @@ export default {
         default:
           break;
       }
+    }
+  },
+  computed:{
+    treeIsEmpty(){
+     return Object.keys(this.root).length === 0
     }
   },
   components: {

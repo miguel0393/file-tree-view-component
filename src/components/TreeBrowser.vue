@@ -22,8 +22,7 @@
     </div>
     <div v-else>
       <p>Empty tree</p>
-      <input v-model="rootName">
-      <button v-on:click="addRootName">Element</button>
+      <button v-on:click="addRootName">Create tree</button>
     </div>
   </div>
 </template>
@@ -49,16 +48,6 @@ export default {
   methods: {
     nodeClicked() {
       this.expanded = !this.expanded;
-      if (!this.hasChildren) {
-        // this.$set(this.node, "children", [
-        //   {
-        //     name: "newchildren.js",
-        //     content: "New Added Children"
-        //   }
-        // ]);
-        this.$emit("onClick", this.node);
-      }
-      this.$emit("treeUpdated", "");
     },
     getStyle(node) {
       let color = "#e74c3c";
@@ -71,12 +60,7 @@ export default {
       };
     },
     addRootName() {
-      if (this.rootName !== '') {
-        this.$set(this.node, 'name', this.rootName);
-        this.$set(this.node, 'children', []);
-        this.$emit("treeUpdated", "");
-        this.treeIsEmpty = false;
-      }
+      this.$emit("setRootName");
     },
     handleContextMenu(e) {
       e.preventDefault();
