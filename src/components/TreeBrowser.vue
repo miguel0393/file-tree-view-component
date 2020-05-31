@@ -1,13 +1,13 @@
 <template>
-  <div id="app" @contextmenu="(e) => e.preventDefault()">
-    <div class="container" v-if="!treeIsEmpty">
+  <div @contextmenu="(e) => e.preventDefault()">
+    <div v-if="!treeIsEmpty">
       <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @dblclick="nodeClicked" >
-        <span unselectable="on" v-if="hasChildren" class="type">{{expanded ? '&#9660;' : '&#9658;'}}</span>
-        <span unselectable="on" v-else class="type">&#9671;</span>
-        <span unselectable="on" :style="getStyle(node)">{{ node.name }}</span>
+        <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expanded, collapsed: !expanded}"></span>
+        <span unselectable="on" v-else class="file-node"></span>
+        <span unselectable="on" class="node-name" :style="getStyle(node)">{{ node.name }}</span>
       </div>
 
-      <div v-if="expanded">
+      <div class="node-children" v-if="expanded">
         <TreeBrowser
           v-for="child in node.children"
           :key="child.name"
@@ -108,31 +108,5 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  width: 20%;
-  height: 100%;
-  background-color: #2c3e50;
-}
-
-.node {
-  text-align: left;
-  font-size: 16px;
-  width: 100%;
-
-  overflow-x: visible;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-
-.container {
-  margin: 5px;
-  width: 100%;
-}
-
-.type {
-  margin-right: 5px;
-}
+@import '../assets/styles/tree-browser.css';
 </style>
