@@ -14,6 +14,7 @@
           :node="child"
           :depth="depth + 1"
           :treeIsEmpty="treeIsEmpty"
+          :expanded="expandedChild"
           @onClick="(node) => $emit('onClick', node)"
           @treeUpdated="() => $emit('treeUpdated', '')"
           @onRightClick="(e, target, type) => $emit('onRightClick',e, target, type)"
@@ -37,17 +38,24 @@ export default {
       type: Number,
       default: 0
     },
-    treeIsEmpty: Boolean
+    treeIsEmpty: Boolean,
+    expanded: Boolean,
   },
   data() {
     return {
-      expanded: false,
       rootName:'',
+      expandedChild: true,
     };
   },
   methods: {
     nodeClicked() {
       this.expanded = !this.expanded;
+      if (this.depth != 0) {
+        this.expandedChild = false;
+        if (!this.hasChildren) {
+          this.$emit("onClick", this.node);
+        }
+      }
     },
     getStyle(node) {
       let color = "#e74c3c";
@@ -86,6 +94,15 @@ export default {
         return false;
       }
     },
+    // expandNodes() {
+    //   if (this.depth > 0) {
+    //     alert("raiz");
+    //     return !this.expanded;
+    //   } else {
+    //     alert("hijo")
+    //     return true;
+    //   }
+    // }
   }
 };
 </script>
@@ -108,7 +125,6 @@ export default {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  
 }
 
 .container {

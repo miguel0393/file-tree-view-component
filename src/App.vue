@@ -6,6 +6,7 @@
       class="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
+      :expanded="expandedTree"
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
@@ -70,7 +71,8 @@ export default {
       modalTitle: "Cambiar Nombre",
       modalShowTextArea: false,
       modalCurrentName: null,
-      modalCurrentContent: null
+      modalCurrentContent: null,
+      expandedTree: false
     };
   },
   created() {
@@ -90,6 +92,7 @@ export default {
       this.showModalDialog('Set tree name', false)
     },
     showContextMenu(e, target, type) {
+      this.expandedTree = true;
       this.currentNode = target;
       this.contextMenuType = type;
       this.contextMenuXPosition = e.x;
