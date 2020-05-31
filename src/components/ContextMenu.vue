@@ -72,23 +72,6 @@ export default {
 </script>
 
 <style scoped>
-.custom-cm {
-  text-align: left;
-  color: black;
-  background-color: aliceblue;
-  border: 1px solid #cccccc;
-  box-shadow: 1px 1px 10px rgb(0, 0, 0, 0.1);
-  padding: 10px 0px;
-  position: absolute;
-  width: 200px;
-}
 
-.custom-cm__item {
-  cursor: pointer;
-  padding: 8px 15px;
-}
-
-.custom-cm__item:hover {
-  background-color: antiquewhite;
-}
+@import '../assets/styles/context-menu.css';
 </style>

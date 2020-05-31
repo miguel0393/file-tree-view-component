@@ -18,18 +18,6 @@ export default {
 </script>
 
 <style scoped>
-#file-content {
-  background-color: #34495e;
-  display: inline-block;
-  width: 50%;
-  display: inline-block;
-}
 
-.content {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 18px;
-  text-align: left;
-  margin: 20px;
-
-}
+@import '../assets/styles/file-content.css';
 </style>

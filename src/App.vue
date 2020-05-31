@@ -212,40 +212,7 @@ export default {
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
 
-body {
-  background-color: #4b6584;
-  color: aliceblue;
-  padding:
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  width: 100%;
-}
-
-
-#tree-container{
-  /* background-color: yellow; */
-  background-color: #2c3e50;
-  display: flex;
-  padding: 10px;
-}
-
-#tree{
-  overflow: auto;
-}
-
-#tree-container > #tree {
-  width: 50%;
-  display: inline-block
-}
-
+@import './assets/styles/tree-container.css';
 
 </style>
