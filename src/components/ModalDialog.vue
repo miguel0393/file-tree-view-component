@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="modal-window">
     <transition name="fade" appear>
       <div class="modal">
         <h1>{{title}}</h1>

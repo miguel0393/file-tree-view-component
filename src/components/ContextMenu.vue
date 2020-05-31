@@ -1,6 +1,6 @@
 <template>
   <div
-    id="app"
+    id="context-menu"
     class="custom-cm"
     v-if="visible"
     :style="{ 'top': yPosition + 'px', 'left': xPosition + 'px'}"

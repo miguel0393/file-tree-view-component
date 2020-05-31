@@ -140,7 +140,7 @@ export default {
   height: 28px;
   width: 28px;
   display: inline-block;
-  /* vertical-align: middle; */
+  vertical-align: middle;
 }
 
 .node-name{
@@ -165,5 +165,9 @@ export default {
 
 .file-node:before{
   background-image: url('../assets/file.svg');
+}
+
+.node-children{
+  margin: 0.1px;
 }
 </style>

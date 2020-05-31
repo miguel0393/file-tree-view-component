@@ -219,6 +219,7 @@ export default {
 body {
   background-color: #4b6584;
   color: aliceblue;
+  padding:
 }
 
 #app {
