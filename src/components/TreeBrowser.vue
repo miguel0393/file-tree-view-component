@@ -2,12 +2,12 @@
   <div @contextmenu="(e) => e.preventDefault()">
     <div v-if="!treeIsEmpty">
       <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @dblclick="nodeClicked" >
-        <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expanded, collapsed: !expanded}"></span>
+        <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expandedRoot, collapsed: !expandedRoot}"></span>
         <span unselectable="on" v-else class="file-node"></span>
         <span unselectable="on" class="node-name" :style="getStyle(node)">{{ node.name }}</span>
       </div>
 
-      <div class="node-children" v-if="expanded">
+      <div class="node-children" v-if="expandedRoot">
         <TreeBrowser
           v-for="child in node.children"
           :key="child.name"
@@ -44,12 +44,13 @@ export default {
   data() {
     return {
       rootName:'',
+      expandedRoot: this.expanded,
       expandedChild: true,
     };
   },
   methods: {
     nodeClicked() {
-      this.expanded = !this.expanded;
+      this.expandedRoot = !this.expandedRoot;
       if (this.depth != 0) {
         this.expandedChild = false;
         if (!this.hasChildren) {
@@ -60,7 +61,6 @@ export default {
     getStyle(node) {
       let color = "#e74c3c";
       if (!node.children) {
-        // color = colorHash.hex(node.name.split(".")[1]);
         color = "#ecf0f1";
       }
       return {
@@ -93,20 +93,11 @@ export default {
       } else {
         return false;
       }
-    },
-    // expandNodes() {
-    //   if (this.depth > 0) {
-    //     alert("raiz");
-    //     return !this.expanded;
-    //   } else {
-    //     alert("hijo")
-    //     return true;
-    //   }
-    // }
+    }
   }
 };
 </script>
 
 <style scoped>
-@import '../assets/styles/tree-browser.css';
+  @import '../assets/styles/tree-browser.css';
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="onClick">
+  <div id="app">
     <TreeController/>
   </div>
     

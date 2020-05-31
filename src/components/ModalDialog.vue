@@ -10,7 +10,7 @@
           placeholder="File content..."
           resize="false"
           v-if="showTextArea"
-          v-model="elementContent"
+          v-model="inputContent"
         />
         <button @click="okButtonClicked">Ok</button>
         <button @click="cancelButtonClicked">Cancel</button>
@@ -39,12 +39,13 @@ export default {
   },
   data(){
     return{
-      inputName: this.elementName
+      inputName: this.elementName,
+      inputContent: this.elementContent
     }
   },
   methods: {
     okButtonClicked() {
-      this.$emit("onOkClick", this.inputName, this.elementContent);
+      this.$emit("onOkClick", this.inputName, this.inputContent);
     },
     cancelButtonClicked() {
       this.$emit("onCancelClick", this.newName);

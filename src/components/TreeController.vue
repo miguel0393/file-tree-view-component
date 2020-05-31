@@ -6,7 +6,7 @@
       id="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
-      :expanded="expandedTree"
+      :expanded="false"
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       root: {},
-      content: 'Empty file...',
+      content: '',
       contextMenuType: "",
       contextMenuXPosition: 0,
       contextMenuYPosition: 0,
