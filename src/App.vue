@@ -1,9 +1,9 @@
 <template>
   <div id="app" @click="onClick">
     <h1>Files Tree-View Component</h1>
-
-    <TreeBrowser
-      class="tree"
+    <div id="tree-container">
+      <TreeBrowser
+      id="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
       :expanded="expandedTree"
@@ -33,6 +33,8 @@
       @onCancelClick="() => this.modalDialogIsVisible = false"
     />
   </div>
+    </div>
+    
 </template>
 
 <script>
@@ -224,9 +226,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  width: 100%;
 }
 
-.tree {
-  position: fixed;
+
+#tree-container{
+  /* background-color: yellow; */
+  background-color: #2c3e50;
+  display: flex;
+  padding: 10px;
 }
+
+#tree{
+  overflow: auto;
+}
+
+#tree-container > #tree {
+  width: 50%;
+  display: inline-block
+}
+
+
 </style>
