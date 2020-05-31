@@ -5,7 +5,7 @@
         <h1>{{title}}</h1>
         <!-- <p>{{description}}</p> -->
 
-        <input type="text" autofocus placeholder="Name..." v-model="inputName" />
+        <input type="text" autofocus="true" placeholder="Name..." v-model="inputName" />
         <textarea
           placeholder="File content..."
           resize="false"

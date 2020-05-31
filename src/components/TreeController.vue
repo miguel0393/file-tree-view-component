@@ -6,7 +6,7 @@
       id="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
-      :expanded="false"
+      :expanded="expandedTree"
       @onClick="nodeWasClicked"
       @onRightClick="showContextMenu"
       @treeUpdated="treeWasUpdated"
@@ -71,12 +71,15 @@ export default {
   },
   methods: {
     nodeWasClicked(node) {
+      this.expandedTree = true;
       this.content = node.content;
     },
     treeWasUpdated() {
+      this.expandedTree = true;
       localStorage.treeStructure = JSON.stringify(this.root);
     },
     setRootName(){
+      this.expandedTree = true;
       this.currentOperation = 'set-root-name';
       this.showModalDialog('Set tree name', false)
     },
