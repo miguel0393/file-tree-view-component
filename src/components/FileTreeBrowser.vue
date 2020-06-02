@@ -1,10 +1,12 @@
 <template>
   <div @contextmenu="(e) => e.preventDefault()">
     <div v-if="!treeIsEmpty">
-      <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @contextmenu="handleContextMenu($event)" @dblclick="nodeClicked" >
-        <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expandedRoot, collapsed: !expandedRoot}"></span>
-        <span unselectable="on" v-else class="file-node"></span>
-        <span unselectable="on" class="node-name" :style="getStyle(node)">{{ node.name }}</span>
+      <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @dblclick="nodeClicked" >
+        <div class="elements" @contextmenu="handleContextMenu($event)">
+          <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expandedRoot, collapsed: !expandedRoot}"></span>
+          <span unselectable="on" v-else class="file-node"></span>
+          <span unselectable="on" class="node-name" :style="getStyle(node)">{{ node.name }}</span>
+        </div>
       </div>
 
       <div class="node-children" v-if="expandedRoot">
