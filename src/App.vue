@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <TreeController/>
+    <FileTreeVisualizer/>
   </div>
     
 </template>
 
 <script>
-import TreeController from "./components/TreeController.vue";
+import FileTreeVisualizer from "./components/FileTreeVisualizer.vue";
 
 export default {
   name: "App",
   props: { },
   components: {
-    TreeController
+    FileTreeVisualizer
   }
 };
 </script>

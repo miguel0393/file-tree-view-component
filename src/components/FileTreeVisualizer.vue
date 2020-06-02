@@ -2,7 +2,7 @@
   <div id="app" @click="onClick">
     <h1>Files Tree-View Component</h1>
     <div id="tree-container">
-      <TreeBrowser
+      <FileTreeBrowser
       id="tree"
       :node="root"
       :treeIsEmpty="Object.keys(this.root).length === 0"
@@ -38,13 +38,13 @@
 </template>
 
 <script>
-import TreeBrowser from "./TreeBrowser.vue";
+import FileTreeBrowser from "./FileTreeBrowser.vue";
 import FileContent from "./FileContent.vue";
 import ContextMenu from "./ContextMenu.vue";
 import ModalDialog from "./ModalDialog.vue";
 
 export default {
-  name: "TreeController",
+  name: "FileTreeVisualizer",
   props: { },
   data() {
     return {
@@ -193,7 +193,7 @@ export default {
     }
   },
   components: {
-    TreeBrowser,
+    FileTreeBrowser,
     FileContent,
     ContextMenu,
     ModalDialog
@@ -203,6 +203,6 @@ export default {
 
 <style>
 
-@import '../assets/styles/tree-controller.css';
+@import '../assets/styles/file-tree-visualizer.css';
 
 </style>

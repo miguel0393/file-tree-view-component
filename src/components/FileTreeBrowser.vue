@@ -8,7 +8,7 @@
       </div>
 
       <div class="node-children" v-if="expandedRoot">
-        <TreeBrowser
+        <FileTreeBrowser
           v-for="child in node.children"
           :key="child.name"
           :node="child"
@@ -31,7 +31,7 @@
 <script>
 
 export default {
-  name: "TreeBrowser",
+  name: "FileTreeBrowser",
   props: {
     node: Object,
     depth: {
@@ -99,5 +99,5 @@ export default {
 </script>
 
 <style scoped>
-  @import '../assets/styles/tree-browser.css';
+  @import '../assets/styles/file-tree-browser.css';
 </style>
