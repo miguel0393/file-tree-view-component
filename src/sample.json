@@ -1,13 +1,26 @@
 {
-  "name": "/",
-  "children": [
-    {
-      "name": "createTreeData1.js",
-      "content": "Contenido de prueba 1"
-    },
-    {
-      "name": "createTreeData2.js",
-      "content": "Contenido de prueba 2"
-    }
+  "root": [
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" }
+  ],
+  "folder": [
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" }
+  ],
+  "file": [
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" },
+    { "name": "Delete tree", "function": "delete-tree" }
   ]
 }
+
+
+{"name":"root","children":[{"name":"Folder 1","children":[{"name":"File 1","content":"File content"}]}]}
+
+
+{"name":"root","children":[{"name":"Folder 1","children":[{"name":"File 1","content":"File content"},{"name":"File 2","content":"File 2 content"},{"name":"File 3","content":"File 3 content"},{"name":"File 4","content":"File 4 content"}]}]}
+
+
+{"name":"hfghfghf","children":[{"name":"newchildren.js","content":"New Added Children","children":[{"name":"newchildren.js","content":"New Added Children","children":[{"name":"newchildren.js","content":"New Added Children","children":[{"name":"newchildren.js","content":"New Added Children"}]}]}]}]}
