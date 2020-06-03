@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>File Tree-View Component</h1>
     <FileTreeVisualizer/>
   </div>
     

@@ -25,7 +25,7 @@
     </div>
     <div v-else>
       <p>Empty tree</p>
-      <button v-on:click="addRootName">Create tree</button>
+      <button id="create-tree-btn" v-on:click="addRootName">Create tree</button>
     </div>
   </div>
 </template>

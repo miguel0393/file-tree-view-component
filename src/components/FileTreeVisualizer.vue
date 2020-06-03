@@ -1,40 +1,39 @@
 <template>
   <div id="app" @click="onClick">
-    <h1>Files Tree-View Component</h1>
     <div id="tree-container">
       <FileTreeBrowser
-      id="tree"
-      :node="root"
-      :treeIsEmpty="Object.keys(this.root).length === 0"
-      :expanded="expandedTree"
-      @onClick="nodeWasClicked"
-      @onRightClick="showContextMenu"
-      @treeUpdated="treeWasUpdated"
-      @setRootName="setRootName"
-    />
+        id="tree"
+        :node="root"
+        :treeIsEmpty="Object.keys(this.root).length === 0"
+        :expanded="expandedTree"
+        @onClick="nodeWasClicked"
+        @onRightClick="showContextMenu"
+        @treeUpdated="treeWasUpdated"
+        @setRootName="setRootName"
+      />
 
-    <FileContent :content="content" />
+      <FileContent :content="content" />
 
-    <ContextMenu
-      :xPosition="contextMenuXPosition"
-      :yPosition="contextMenuYPosition"
-      :visible="contextMenuIsVisible"
-      @onClick="handleMenuOperation"
-      :menuType="contextMenuType"
-    />
+      <ContextMenu
+        :xPosition="contextMenuXPosition"
+        :yPosition="contextMenuYPosition"
+        :visible="contextMenuIsVisible"
+        @onClick="handleMenuOperation"
+        :menuType="contextMenuType"
+      />
 
-    <ModalDialog v-if="modalDialogIsVisible"
-      :visible="modalDialogIsVisible"
-      :title="modalTitle"
-      :showTextArea="modalShowTextArea"
-      :elementName="modalCurrentName"
-      :elementContent="modalCurrentContent"
-      @onOkClick="hideModalDialog"
-      @onCancelClick="() => this.modalDialogIsVisible = false"
-    />
-  </div>
+      <ModalDialog
+        v-if="modalDialogIsVisible"
+        :visible="modalDialogIsVisible"
+        :title="modalTitle"
+        :showTextArea="modalShowTextArea"
+        :elementName="modalCurrentName"
+        :elementContent="modalCurrentContent"
+        @onOkClick="hideModalDialog"
+        @onCancelClick="() => this.modalDialogIsVisible = false"
+      />
     </div>
-    
+  </div>
 </template>
 
 <script>
@@ -45,11 +44,11 @@ import ModalDialog from "./ModalDialog.vue";
 
 export default {
   name: "FileTreeVisualizer",
-  props: { },
+  props: {},
   data() {
     return {
       root: {},
-      content: '',
+      content: "",
       contextMenuType: "",
       contextMenuXPosition: 0,
       contextMenuYPosition: 0,
@@ -78,10 +77,10 @@ export default {
       this.expandedTree = true;
       localStorage.treeStructure = JSON.stringify(this.root);
     },
-    setRootName(){
+    setRootName() {
       this.expandedTree = true;
-      this.currentOperation = 'set-root-name';
-      this.showModalDialog('Set tree name', false)
+      this.currentOperation = "set-root-name";
+      this.showModalDialog("Set tree name", false);
     },
     showContextMenu(e, target, type) {
       this.expandedTree = true;
@@ -95,7 +94,7 @@ export default {
       this.modalDialogIsVisible = true;
       this.modalTitle = title;
       this.modalShowTextArea = showTextArea;
-      
+
       this.modalCurrentName = currentName;
       this.modalCurrentContent = currentContent;
     },
@@ -104,28 +103,28 @@ export default {
 
       switch (this.currentOperation) {
         case "add-subfolder":
-            this.currentNode.node.children.push({
-              name: newName,
-              children: []
-            });
+          this.currentNode.node.children.push({
+            name: newName,
+            children: []
+          });
           break;
 
-          case "add-file":
-            this.currentNode.node.children.push({
-              name: newName,
-              content: ""
-            });
+        case "add-file":
+          this.currentNode.node.children.push({
+            name: newName,
+            content: ""
+          });
           break;
 
-          case "modify-file":
-            this.$set(this.currentNode.node, "name", newName);
-            this.$set(this.currentNode.node, "content", newContent);
-            this.content = this.currentNode.node.content;
+        case "modify-file":
+          this.$set(this.currentNode.node, "name", newName);
+          this.$set(this.currentNode.node, "content", newContent);
+          this.content = this.currentNode.node.content;
           break;
 
-          case "set-root-name":
-            this.$set(this.root, 'name', newName)
-            this.$set(this.root, 'children', [])
+        case "set-root-name":
+          this.$set(this.root, "name", newName);
+          this.$set(this.root, "children", []);
           break;
       }
 
@@ -147,14 +146,17 @@ export default {
           break;
         }
       }
-      parent.$children.splice(index,1);
-      this.$set(parent.node, 'children', parent.$children.map(child => child.node));
+      parent.$children.splice(index, 1);
+      this.$set(
+        parent.node,
+        "children",
+        parent.$children.map(child => child.node)
+      );
       this.treeWasUpdated();
     },
     handleMenuOperation(operation) {
       this.contextMenuIsVisible = false;
-      this.modalCurrentName = "",
-      this.modalCurrentContent = ""
+      (this.modalCurrentName = ""), (this.modalCurrentContent = "");
       this.currentOperation = operation;
 
       switch (operation) {
@@ -179,7 +181,12 @@ export default {
           break;
 
         case "modify-file":
-           this.showModalDialog("Modify File", true, this.currentNode.node.name, this.currentNode.node.content);
+          this.showModalDialog(
+            "Modify File",
+            true,
+            this.currentNode.node.name,
+            this.currentNode.node.content
+          );
           break;
 
         default:
@@ -187,9 +194,9 @@ export default {
       }
     }
   },
-  computed:{
-    treeIsEmpty(){
-     return Object.keys(this.root).length === 0
+  computed: {
+    treeIsEmpty() {
+      return Object.keys(this.root).length === 0;
     }
   },
   components: {
@@ -202,7 +209,5 @@ export default {
 </script>
 
 <style>
-
-@import '../assets/styles/file-tree-visualizer.css';
-
+@import "../assets/styles/file-tree-visualizer.css";
 </style>
