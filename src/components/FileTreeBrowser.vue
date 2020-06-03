@@ -5,7 +5,6 @@
         <div class="elements" @contextmenu="handleContextMenu($event)">
           <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expandedRoot, collapsed: !expandedRoot}"></span>
           <span unselectable="on" v-else class="file-node"></span>
-          <!-- <span unselectable="on" class="node-name" :style="getStyle(node)">{{ node.name }}</span> -->
           <span unselectable="on" class="node-name" v-bind:class="{folder: hasChildren, file: !hasChildren}">{{ node.name }}</span>
         </div>
       </div>
@@ -60,15 +59,6 @@ export default {
           this.$emit("onClick", this.node);
         }
       }
-    },
-    getStyle(node) {
-      let color = "#e74c3c";
-      if (!node.children) {
-        color = "#ecf0f1";
-      }
-      return {
-        color
-      };
     },
     addRootName() {
       this.$emit("setRootName");
