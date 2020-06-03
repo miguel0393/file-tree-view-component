@@ -30,6 +30,14 @@
   .node-name{
     width: 50%;
   }
+
+  .node-name.folder{
+    font-weight: bold;
+  }
+
+  .folder:hover, .file:hover{
+    text-decoration: underline;
+  }
   
   .collapsed:before, .expanded:before, .file-node:before{
     content: '';
