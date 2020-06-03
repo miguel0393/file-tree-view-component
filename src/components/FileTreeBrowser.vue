@@ -2,7 +2,7 @@
   <div @contextmenu="(e) => e.preventDefault()">
     <div v-if="!treeIsEmpty">
       <div class="node" :style="{ 'margin-left': depth * 20 + 'px' }" @dblclick="nodeClicked" >
-        <div class="elements" @contextmenu="handleContextMenu($event)">
+        <div class="elements"  @contextmenu="handleContextMenu($event)">
           <span unselectable="on" v-if="hasChildren" class="type" v-bind:class="{expanded: expandedRoot, collapsed: !expandedRoot}"></span>
           <span unselectable="on" v-else class="file-node"></span>
           <span unselectable="on" class="node-name" v-bind:class="{folder: hasChildren, file: !hasChildren}">{{ node.name }}</span>
