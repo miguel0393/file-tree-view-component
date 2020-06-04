@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>File Tree-View Component</h1>
-    <FileTreeVisualizer :show-folder-opt="false"/>
+    <FileTreeVisualizer :showFolderOpt="false"/>
   </div>
     
 </template>
@@ -18,6 +18,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
