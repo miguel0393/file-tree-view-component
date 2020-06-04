@@ -20,6 +20,7 @@
         :visible="contextMenuIsVisible"
         @onClick="handleMenuOperation"
         :menuType="contextMenuType"
+        :showFolderOption="show-folder-opt"
       />
 
       <ModalDialog
@@ -44,7 +45,12 @@ import ModalDialog from "./ModalDialog.vue";
 
 export default {
   name: "FileTreeVisualizer",
-  props: {},
+  props: {
+    show-folder-opt: {
+      type: Boolean,
+      default: false
+    },
+  },
   data() {
     return {
       root: {},
