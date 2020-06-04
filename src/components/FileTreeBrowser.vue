@@ -12,7 +12,7 @@
       <div class="node-children" v-if="expandedRoot">
         <FileTreeBrowser
           v-for="child in node.children"
-          :key="child.name"
+          :key="child.key"
           :node="child"
           :depth="depth + 1"
           :treeIsEmpty="treeIsEmpty"
