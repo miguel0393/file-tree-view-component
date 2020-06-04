@@ -105,6 +105,7 @@ export default {
         case "add-subfolder":
           this.currentNode.node.children.push({
             name: newName,
+            key: this.generateKey(),
             children: []
           });
           break;
@@ -112,6 +113,7 @@ export default {
         case "add-file":
           this.currentNode.node.children.push({
             name: newName,
+            key: this.generateKey(),
             content: ""
           });
           break;
@@ -125,6 +127,7 @@ export default {
         case "set-root-name":
           this.$set(this.root, "name", newName);
           this.$set(this.root, "children", []);
+          this.$set(this.root, "key", this.generateKey());
           break;
       }
 
@@ -192,6 +195,9 @@ export default {
         default:
           break;
       }
+    },
+    generateKey() {
+      return Date.now();
     }
   },
   computed: {
