@@ -201,15 +201,20 @@ Tampoco se recomienda su uso cuando se desee almacenar archivos de otro tipo dif
 Para representar las carpetas y archivos en el componente, se cuenta con tres iconos distintos:
 
 Carpeta cerrada
+
 ![Carperta cerrada](/../../media/images/folder.png?raw=true "Carpeta cerrada")
+
 Carpeta abierta
+
 ![Carperta abierta](/../../media/images/openfolder.png?raw=true "Carpeta abierta")
+
 Archivo
+
 ![Archivo](/../../media/images/file.png?raw=true "Archivo")
 
 Los botones usados a dentro del componente tienen un estilo simple, sin ninguna convención de colores en particular:
 
-![Boton](/../../media/images/tree-button.png?raw=true "Boton")
+![Boton](/../../media/images/tree-button.png?raw=true  "Boton")
 
 Cada uno de los nodos del árbol tiene un estado visual hover para identificar más fácilmente en cuál se aplicarán los eventos de mouse:
 
