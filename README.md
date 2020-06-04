@@ -103,9 +103,11 @@ Para hacer modificaciones al código fuente del componente se necesita contar co
 El componente de visualización de árbol de archivos se compone de dos secciones cada una ocupando el 50% del ancho de la pantalla.
 La zona izquierda muestra la estructura del árbol y su contenido mientras que la zona derecha está destinada a mostrar el contenido de texto dentro de los archivos.
 
-![Estructura visual del componente](./media/tree-general.png?raw=true)
+![Estructura visual del componente](../media/images/tree-general.png?raw=true)
 
-![Alt text](/../media/images/tree-general.png?raw=true "Optional Title")
+![Alt text](/../../media/images/tree-general.png?raw=true "Optional Title")
+
+![Demo Animation](../assets/demo.gif?raw=true)
 
 
 
