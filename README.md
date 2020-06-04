@@ -105,5 +105,7 @@ La zona izquierda muestra la estructura del árbol y su contenido mientras que l
 
 ![Estructura visual del componente](./media/tree-general.png?raw=true)
 
+![Alt text](/../media/images/tree-general.png?raw=true "Optional Title")
+
 
 
