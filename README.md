@@ -103,13 +103,13 @@ Para hacer modificaciones al código fuente del componente se necesita contar co
 El componente de visualización de árbol de archivos se compone de dos secciones cada una ocupando el 50% del ancho de la pantalla.
 La zona izquierda muestra la estructura del árbol y su contenido mientras que la zona derecha está destinada a mostrar el contenido de texto dentro de los archivos.
 
-![Estructura general del componente](/../../media/images/tree-general.png?raw=true "Estructura general del componente")
+![Estructura general del componente](/../media/images/tree-general.png?raw=true "Estructura general del componente")
 
 ## Referencia de código
 
 El código del componente está organizado en archivos y carpetas siguiendo el estándar de proyectos en Vue.js y el esqueleto creado por la utilidad de línea de comandos `vue-cli`:
 
-![Estructura de codigo](/../../media/images/project-structure.png?raw=true "Estructura de codigo")
+![Estructura de codigo](/../media/images/project-structure.png?raw=true "Estructura de codigo")
 
 La carpeta src es la carpeta raíz del código del componente:
 
@@ -176,7 +176,7 @@ export default {
 Vue provee una forma de construir y simplificar el componente en la menor cantidad de archivos posible por medio del comando `npm run build`.
 Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist`
 
-![Carpeta dist](/../../media/images/dist-structure.png?raw=true "Carpeta dist")
+![Carpeta dist](/../media/images/dist-structure.png?raw=true "Carpeta dist")
 
 Para incluir el componente dentro de un archivo HTML convencional se sugiere inicializar los encabezados y el cuerpo del HTML de la siguiente manera
 
@@ -216,23 +216,23 @@ Para representar las carpetas y archivos en el componente, se cuenta con tres ic
 
 Carpeta cerrada
 
-![Carperta cerrada](/../../media/images/folder.png?raw=true "Carpeta cerrada")
+![Carperta cerrada](/../media/images/folder.png?raw=true "Carpeta cerrada")
 
 Carpeta abierta
 
-![Carperta abierta](/../../media/images/openfolder.png?raw=true "Carpeta abierta")
+![Carperta abierta](/../media/images/openfolder.png?raw=true "Carpeta abierta")
 
 Archivo
 
-![Archivo](/../../media/images/file.png?raw=true "Archivo")
+![Archivo](/../media/images/file.png?raw=true "Archivo")
 
 Los botones usados a dentro del componente tienen un estilo simple, sin ninguna convención de colores en particular:
 
-![Boton](/../../media/images/tree-button.png?raw=true  "Boton")
+![Boton](/../media/images/tree-button.png?raw=true  "Boton")
 
 Cada uno de los nodos del árbol tiene un estado visual hover para identificar más fácilmente en cuál se aplicarán los eventos de mouse:
 
-![Hover Arbol](/../../media/gifs/tree-hover.gif?raw=true "Hover Arbol")
+![Hover Arbol](/../media/gifs/tree-hover.gif?raw=true "Hover Arbol")
 
 
 ### Especificación CSS
@@ -279,7 +279,7 @@ Todas las operaciones descritas a continuación alteran la estructura almacenada
 
 Al iniciar el componente por primera vez se mostrará el botón "Create tree" el cual permitirá inicializar el árbol con un nombre para su raíz.
 
-![Inicializar árbol](/../../media/gifs/create-tree.gif?raw=true "Inicializar árbol")
+![Inicializar árbol](/../media/gifs/create-tree.gif?raw=true "Inicializar árbol")
 
 Al ingresar y confirmar el nombre del árbol se creará en LocalStorage del navegador una entrada con nombre `treeStructure` y un valor inicial en formato string 
 
@@ -291,45 +291,45 @@ Al ingresar y confirmar el nombre del árbol se creará en LocalStorage del nave
 
 Sobre la raíz del árbol por medio de click derecho están disponibles las siguientes operaciones
 
-![Operaciones de raíz](/../../media/images/tree-operations.png?raw=true "Operaciones de raíz")
+![Operaciones de raíz](/../media/images/tree-operations.png?raw=true "Operaciones de raíz")
 
 - **Add subfolder**: Agrega una carpeta ligada directamente a la raíz del árbol con el nombre especificado.
 
-![Agregar subfolder a raíz](/../../media/gifs/root-add-folder.gif?raw=true "Agregar subfolder a raíz")
+![Agregar subfolder a raíz](/../media/gifs/root-add-folder.gif?raw=true "Agregar subfolder a raíz")
 
 - **Add File**: Agrega un archivo vacío a la raíz del árbol. Se abre una ventana modal para ingresar el nombre del archivo.
 
-![Agregar archivo a raíz](/../../media/gifs/root-add-file.gif?raw=true "Agregar archivo a raíz")
+![Agregar archivo a raíz](/../media/gifs/root-add-file.gif?raw=true "Agregar archivo a raíz")
 
 - **Delete tree**: Borrar la estructura completa del árbol dejando en LocalStorage un string representando una estructura JSON vacía.
 
-![Borrar árbol](/../../media/gifs/root-delete.gif?raw=true "Borrar árbol")
+![Borrar árbol](/../media/gifs/root-delete.gif?raw=true "Borrar árbol")
 
 ### Operaciones click derecho sobre una carpeta
 
-![Operaciones de folder](/../../media/images/folder-operations.png?raw=true "Operaciones de folder")
+![Operaciones de folder](/../media/images/folder-operations.png?raw=true "Operaciones de folder")
 
 - **Add subfolder**: Agrega una nueva carpeta ligada directamente a la carpeta existente. Esta operación solo está disponible cuando el prop `showFolderOpt` se ha pasado con valor `true`
 
 - **Add file**: Agrega un nuevo archivo vacío con el nombre especificado en la ventana modal.
 
-![Agregar archivo a folder](/../../media/gifs/folder-create-file.gif?raw=true "Agregar archivo a folder")
+![Agregar archivo a folder](/../media/gifs/folder-create-file.gif?raw=true "Agregar archivo a folder")
 
 - **Delete subfolder**: Borra el folder y su contenido interno. Tenga muy en cuenta que todos los contenidos internos, incluyendo archivos, son eliminados también.
 
-![Borrar folder](/../../media/gifs/folder-delete.gif?raw=true "Borrar folder")
+![Borrar folder](/../media/gifs/folder-delete.gif?raw=true "Borrar folder")
 
 ### Operaciones click derecho sobre un archivo
 
-![Operaciones de archivo](/../../media/images/file-operations.png?raw=true "Operaciones de archivo")
+![Operaciones de archivo](/../media/images/file-operations.png?raw=true "Operaciones de archivo")
 
 - **Modify file**: Permite modificar el contenido del archivo ingresando texto por medio de la ventana modal.
 
-![Modificar archivo](/../../media/gifs/file-modify.gif?raw=true "Modificar archivo")
+![Modificar archivo](/../media/gifs/file-modify.gif?raw=true "Modificar archivo")
 
 - **Delete file**: Borra el archivo y su contenido interno.
 
-![Borrar archivo](/../../media/gifs/file-delete.gif?raw=true "Borrar archivo")
+![Borrar archivo](/../media/gifs/file-delete.gif?raw=true "Borrar archivo")
 
 **Nota: Para ocultar el menú haga click en cualquier zona del contenedor del árbol**
 
