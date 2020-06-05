@@ -105,6 +105,20 @@ La zona izquierda muestra la estructura del árbol y su contenido mientras que l
 
 ![Estructura general del componente](/../../media/images/tree-general.png?raw=true "Estructura general del componente")
 
+## Referencia de código
+
+El código del componente está organizado en archivos y carpetas siguiendo el estándar de proyectos en Vue.js y el esqueleto creado por la utilidad de línea de comandos `vue-cli`:
+
+![Estructura de codigo](/../../media/images/project-structure.png?raw=true "Estructura de codigo")
+
+La carpeta src es la carpeta raíz del código del componente:
+
+- **Assets**: La carpeta assets contiene recursos gráficos y estilos.
+- **Images**: La carpeta images contiene las todas las imágenes utilizadas en el componente.
+- **Styles**: En la carpeta styles se encuentran los archivos CSS para los estilos del componente. Siguiendo la mayor independencia de componentes posible, se maneja un archivo de estilos para cada componente Vue.
+- **Components**: La carpeta components contiene los componentes Vue. Cada componente se compone de: una parte HTML con anotaciones Vue para maquetar su contenido, una parte de código JavaScript para el comportamiento, y un enlace a la hoja de estilos correspondiente.
+- El archivo App.vue es el punto de entrada de la aplicación donde se hace uso del componente.
+
 ## Estructura interna del componente
 
 El componente de visualización de árbol de archivos es el resultado de la colaboración de otros componentes internos que proveen funcionalidades específicas.
@@ -159,7 +173,7 @@ export default {
 
 ## Inicialización del componente en un proyecto HTML/JS convencional
 
-Vue provee una forma de construir y simplificar el componente en la menor cantidad de archivos posible por medio del comando npm run build.
+Vue provee una forma de construir y simplificar el componente en la menor cantidad de archivos posible por medio del comando `npm run build`.
 Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist`
 
 ![Carpeta dist](/../../media/images/dist-structure.png?raw=true "Carpeta dist")
@@ -189,13 +203,13 @@ Para incluir el componente dentro de un archivo HTML convencional se sugiere ini
 </html>
 ```
 
-## Referencia de diseño
-
 **Cuándo usar**: El Componente de vista de árbol de archivos está diseñado para visualizar una estructura de directorios y archivos. La estructura de archivos se crea desde cero dentro del mismo componente y se guarda en formato JSON en el LocalStorage del navegador. Por lo tanto, el componente puede acoplarse a distintas aplicaciones web que necesiten un visor de archivos que permita a los usuarios ver, crear y editar directorios y archivos.
 
 **Cuándo no usar**: Cuando se requiera tener persistencia de la estructura mostrada en el árbol más allá de la que ofrece LocalStorage. Esto incluye almacenamiento en un archivo externo, base de datos o servicio remoto en cloud.
 Tampoco se recomienda su uso cuando se desee almacenar archivos de otro tipo diferentes a archivos de texto plano ya que no está implementada una funcionalidad de carga y almacenamiento de archivos.
- 
+
+## Referencia de diseño
+
 **Estilo visual**: El componente presenta un estilo visual simple, para mantener el componente tan independiente de otros componentes (como un framework CSS) como sea posible. 
 
 Para representar las carpetas y archivos en el componente, se cuenta con tres iconos distintos:
@@ -256,20 +270,6 @@ A continuación, se especifican los archivos CSS y los selectores mas importante
     - `.custom-cm`: Con esta clase se controlan los estilos generales de la ventana para el menú contextual (menú click derecho).
     - `.custom-cm__item`: Con esta clase se controlan los estilos para cada elemento del menú.
 
-
-## Referencia de código
-
-El código del componente está organizado en archivos y carpetas siguiendo el estándar de proyectos en Vue.js y el esqueleto creado por la utilidad de línea de comandos `vue-cli`:
-
-![Estructura de codigo](/../../media/images/project-structure.png?raw=true "Estructura de codigo")
-
-La carpeta src es la carpeta raíz del código del componente:
-
-- **Assets**: La carpeta assets contiene recursos gráficos y estilos.
-- **Images**: La carpeta images contiene las todas las imágenes utilizadas en el componente.
-- **Styles**: En la carpeta styles se encuentran los archivos CSS para los estilos del componente. Siguiendo la mayor independencia de componentes posible, se maneja un archivo de estilos para cada componente Vue.
-- **Components**: La carpeta components contiene los componentes Vue. Cada componente se compone de: una parte HTML con anotaciones Vue para maquetar su contenido, una parte de código JavaScript para el comportamiento, y un enlace a la hoja de estilos correspondiente.
-- El archivo App.vue es el punto de entrada de la aplicación donde se hace uso del componente.
 
 ## Operaciones disponibles en el árbol
 
