@@ -35,9 +35,27 @@ export default {
     menuType: {
       type: String,
       default: ""
+    },
+    showFolderOption: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
+    let folderOptions;
+    if (this.showFolderOption) {
+      folderOptions = [
+          { name: "Add Subfolder", function: "add-subfolder" },
+          { name: "Add file", function: "add-file" },
+          { name: "Delete subfolder", function: "delete-subfolder" }
+        ]
+    }
+    else{
+      folderOptions = [
+          { name: "Add file", function: "add-file" },
+          { name: "Delete subfolder", function: "delete-subfolder" }
+        ]
+    }
     return {
       menuOptions: {
         root: [
@@ -45,11 +63,7 @@ export default {
           { name: "Add file", function: "add-file" },
           { name: "Delete tree", function: "delete-tree" }          
         ],
-        folder: [
-          { name: "Add Subfolder", function: "add-subfolder" },
-          { name: "Add file", function: "add-file" },
-          { name: "Delete subfolder", function: "delete-subfolder" }
-        ],
+        folder: [ ...folderOptions],
         file: [
           { name: "Modify file", function: "modify-file" },
           { name: "Delete file", function: "delete-file" }
