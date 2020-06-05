@@ -160,7 +160,7 @@ export default {
 ## Inicialización del componente en un proyecto HTML/JS convencional
 
 Vue provee una forma de construir y simplificar el componente en la menor cantidad de archivos posible por medio del comando npm run build.
-Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist``
+Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist`
 
 ![Carpeta dist](/../../media/images/dist-structure.png?raw=true "Carpeta dist")
 
@@ -219,3 +219,125 @@ Los botones usados a dentro del componente tienen un estilo simple, sin ninguna 
 Cada uno de los nodos del árbol tiene un estado visual hover para identificar más fácilmente en cuál se aplicarán los eventos de mouse:
 
 ![Hover Arbol](/../../media/gifs/tree-hover.gif?raw=true "Hover Arbol")
+
+
+### Especificación CSS
+
+ 
+A continuación, se especifican los archivos CSS y los selectores mas importantes usados en cada uno de ellos:
+ 
+
+- `file-tree-visualizer.css`
+    - `#app` y `#tree-container`: Con estos selectores se agregan algunos estilos generales para todo el componente file-tree-visualizer, como el tipo de fuente y la alineación del texto.
+    - `#tree`: Con este selector se controlan algunos estilos especificos para el panel file-tree-browser.
+
+
+- `file-tree-browser.css`
+    - `.node`: Con esta clase se controlan los estilos para cada elemento (nodo) del árbol, es decir, carpetas y archivos.
+    - `.node-name`: Controla los estilos para los nombres de archivos.
+    - `.node-name.folder`: Controla los estilos para los nombres de carpetas.
+    - `.elements`: Este selector controla el div que contiene los iconos y nombre del nodo. 
+    - `.collapsed`, `.expanded`, `.file-node`, `.node-name`: con estas clases se controlan los estilos para los íconos de archivos y carpetas.
+    - `#create-tree-btn`: este selector maneja los estilos para el botón de crear árbol.
+
+ 
+- `modal.css`
+    - `.modal`: Con esta clase se controlan los estilos generales de la ventana modal.
+    - `.modal input[type="text"]`: Con este selector se controlan los estilos del campo de texto.
+    - `.modal textarea`: Con este selector se controlan los estilos del textarea, para el contenido del archivo.
+    - `.modal button`: Con este selector se controlan los estilos de los botones de la ventana modal.
+
+
+- `file-content.css`
+    - `#file-content` y `.content`: Estos selectores controlam los estilos generales del panel de visualización del contenido de archivos.
+
+
+- `contetx-menu.css`
+    - `.custom-cm`: Con esta clase se controlan los estilos generales de la ventana para el menú contextual (menú click derecho).
+    - `.custom-cm__item`: Con esta clase se controlan los estilos para cada elemento del menú.
+
+
+## Referencia de código
+
+El código del componente está organizado en archivos y carpetas siguiendo el estándar de proyectos en Vue.js y el esqueleto creado por la utilidad de línea de comandos `vue-cli`:
+
+![Estructura de codigo](/../../media/images/project-structure.png?raw=true "Estructura de codigo")
+
+La carpeta src es la carpeta raíz del código del componente:
+
+- **Assets**: La carpeta assets contiene recursos gráficos y estilos.
+- **Images**: La carpeta images contiene las todas las imágenes utilizadas en el componente.
+- **Styles**: En la carpeta styles se encuentran los archivos CSS para los estilos del componente. Siguiendo la mayor independencia de componentes posible, se maneja un archivo de estilos para cada componente Vue.
+- **Components**: La carpeta components contiene los componentes Vue. Cada componente se compone de: una parte HTML con anotaciones Vue para maquetar su contenido, una parte de código JavaScript para el comportamiento, y un enlace a la hoja de estilos correspondiente.
+- El archivo App.vue es el punto de entrada de la aplicación donde se hace uso del componente.
+
+## Operaciones disponibles en el árbol
+
+Todas las operaciones descritas a continuación alteran la estructura almacenada en LocalStorage una vez son ejecutadas.
+
+### Inicialización del árbol
+
+Al iniciar el componente por primera vez se mostrará el botón "Create tree" el cual permitirá inicializar el árbol con un nombre para su raíz.
+
+![Inicializar árbol](/../../media/gifs/create-tree.gif?raw=true "Inicializar árbol")
+
+Al ingresar y confirmar el nombre del árbol se creará en LocalStorage del navegador una entrada con nombre `treeStructure` y un valor inicial en formato string 
+
+```javascript
+{"name":"nombre_ingresado","children":[]}
+```
+
+### Operaciones click derecho en la raíz del árbol
+
+Sobre la raíz del árbol por medio de click derecho están disponibles las siguientes operaciones
+
+![Operaciones de raíz](/../../media/images/tree-operations.png?raw=true "Operaciones de raíz")
+
+- **Add subfolder**: Agrega una carpeta ligada directamente a la raíz del árbol con el nombre especificado.
+
+![Agregar subfolder a raíz](/../../media/gifs/root-add-folder.gif?raw=true "Agregar subfolder a raíz")
+
+- **Add File**: Agrega un archivo vacío a la raíz del árbol. Se abre una ventana modal para ingresar el nombre del archivo.
+
+![Agregar archivo a raíz](/../../media/gifs/root-add-file.gif?raw=true "Agregar archivo a raíz")
+
+- **Delete tree**: Borrar la estructura completa del árbol dejando en LocalStorage un string representando una estructura JSON vacía.
+
+![Borrar árbol](/../../media/gifs/root-delete.gif?raw=true "Borrar árbol")
+
+### Operaciones click derecho sobre una carpeta
+
+![Operaciones de folder](/../../media/images/folder-operations.png?raw=true "Operaciones de folder")
+
+- **Add subfolder**: Agrega una nueva carpeta ligada directamente a la carpeta existente. Esta operación solo está disponible cuando el prop `showFolderOpt` se ha pasado con valor `true`
+
+- **Add file**: Agrega un nuevo archivo vacío con el nombre especificado en la ventana modal.
+
+![Agregar archivo a folder](/../../media/gifs/folder-create-file.gif?raw=true "Agregar archivo a folder")
+
+- **Delete subfolder**: Borra el folder y su contenido interno. Tenga muy en cuenta que todos los contenidos internos, incluyendo archivos, son eliminados también.
+
+![Borrar folder](/../../media/gifs/folder-delete.gif?raw=true "Borrar folder")
+
+### Operaciones click derecho sobre un archivo
+
+![Operaciones de archivo](/../../media/images/file-operations.png?raw=true "Operaciones de archivo")
+
+- **Modify file**: Permite modificar el contenido del archivo ingresando texto por medio de la ventana modal.
+
+![Modificar archivo](/../../media/gifs/file-modify.gif?raw=true "Modificar archivo")
+
+- **Delete file**: Borra el archivo y su contenido interno.
+
+![Borrar archivo](/../../media/gifs/file-delete.gif?raw=true "Borrar archivo")
+
+**Nota: Para ocultar el menú haga click en cualquier zona del contenedor del árbol**
+
+### Operaciones de doble click sobre el árbol
+
+- **Doble click sobre la raíz del árbol**: Expande el árbol en su totalidad mostrando todo su contenido interno. Un nuevo doble click sobre la raíz del árbol lo contrae en su totalidad.
+
+- **Doble click sobre una carpeta**: Expande el contenido de la carpeta en particular mostrando su contenido interno.
+
+- **Doble click sobre un archivo**: Muestra el contenido del archivo en la zona derecha de la pantalla
+
