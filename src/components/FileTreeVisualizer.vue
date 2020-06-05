@@ -165,6 +165,7 @@ export default {
       switch (operation) {
         case "delete-tree":
           this.deleteTree();
+          this.content = "";
           break;
 
         case "add-subfolder":
@@ -173,6 +174,7 @@ export default {
 
         case "delete-subfolder":
           this.deleteNode(this.currentNode.$parent, this.currentNode);
+          this.content = "";
           break;
 
         case "add-file":
@@ -181,6 +183,7 @@ export default {
 
         case "delete-file":
           this.deleteNode(this.currentNode.$parent, this.currentNode);
+          this.content = "";
           break;
 
         case "modify-file":

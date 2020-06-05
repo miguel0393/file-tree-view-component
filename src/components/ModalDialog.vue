@@ -5,7 +5,7 @@
         <h1>{{title}}</h1>
         <!-- <p>{{description}}</p> -->
 
-        <input type="text" autofocus="true" placeholder="Name..." v-model="inputName" />
+        <input v-focus type="text" placeholder="Name..." v-model="inputName"/>
         <textarea
           placeholder="File content..."
           resize="false"
@@ -50,7 +50,15 @@ export default {
     cancelButtonClicked() {
       this.$emit("onCancelClick", this.newName);
     }
+  },
+  directives: {
+  focus: {
+    // directive definition
+    inserted: function (el) {
+      el.focus()
+    }
   }
+}
 };
 </script>
 
