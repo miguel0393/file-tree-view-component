@@ -174,7 +174,11 @@ export default {
 ## Inicialización del componente en un proyecto HTML/JS convencional
 
 Vue provee una forma de construir y simplificar el componente en la menor cantidad de archivos posible por medio del comando `npm run build`.
-Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist`
+Al realizar la construcción del componente se obtiene una estructura como esta en la carpeta `/dist`.
+
+>Nota: Si desea activar o desactivar la funcionalidad de creación de carpetas deberá generar un build cada vez que desee hacer este cambio. Esto se logra modificando `App.vue` modificando el prop que se le pasa al componente `FileTreeVisualizer`. 
+
+>Por ejemplo para activar la funcionalidad cambie el valor del prop `showFolderOpt` a `true` --> `<FileTreeVisualizer :showFolderOpt="true"/>` y genere un nuevo build por medio del comando `npm run build`
 
 ![Carpeta dist](/../media/images/dist-structure.png?raw=true "Carpeta dist")
 
@@ -331,7 +335,7 @@ Sobre la raíz del árbol por medio de click derecho están disponibles las sigu
 
 ![Borrar archivo](/../media/gifs/file-delete.gif?raw=true "Borrar archivo")
 
-**Nota: Para ocultar el menú haga click en cualquier zona del contenedor del árbol**
+>**Nota: Para ocultar el menú haga click en cualquier zona del contenedor del árbol**
 
 ### Operaciones de doble click sobre el árbol
 
